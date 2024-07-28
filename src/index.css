@@ -1,0 +1,49 @@
+@tailwind base;
+
+html {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.merriweather-light {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.merriweather-regular {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.merriweather-regular-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.merriweather-light-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+@tailwind components;
+@tailwind utilities;
+
+.animate-pop {
+  animation: 0.5s ease-out 0s infinite alternate anim1;
+}
+
+@keyframes anim1 {
+  0% {
+    transform: scale(1.1);
+    background-color: rgb(0 0 0 / 1);
+  }
+  100% {
+    transform: scale(1);
+    background-color: rgb(75 85 99 / 1);
+  }
+}
