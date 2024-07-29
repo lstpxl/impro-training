@@ -2,18 +2,11 @@ import useSound from "use-sound";
 import bellSfx from "@/assets/bell.mp3";
 import successSfx from "@/assets/success.mp3";
 import wooSfx from "@/assets/woo.mp3";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import useWordStore from "./wordStore";
 import useOptionsStore from "./optionsStore";
 import useLessonStore from "./lessonStore";
-
-function useDidMount() {
-  const mountRef = useRef(false);
-  useEffect(() => {
-    mountRef.current = true;
-  }, []);
-  return () => mountRef.current;
-}
+import { useDidMount } from "./lib/useDidMount";
 
 const SoundPlayerBell = () => {
   const [playBellSound] = useSound(bellSfx);

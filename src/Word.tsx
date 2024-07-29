@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import useWordStore from "./wordStore";
 import useLessonStore from "./lessonStore";
+import { useDidMount } from "./lib/useDidMount";
 
 interface WordProps {
   second: boolean;
 }
 const Word = ({ second }: WordProps) => {
+  const didMount = useDidMount();
   const word = useWordStore((state) => state.currentWord);
   const secondWord = useWordStore((state) => state.currentSecondWord);
+  const wordToDisplay = second ? secondWord : word;
   const [animate, setAnimate] = useState(false);
   const isDisplayed = useLessonStore((state) =>
     state.getIsAnyExerciseDisplayed()
@@ -19,10 +22,12 @@ const Word = ({ second }: WordProps) => {
 
   useEffect(() => {
     // TODO start animation from beginning on refresh
-    setAnimate(true);
-    setTimeout(() => {
-      setAnimate(false);
-    }, 500);
+    if (didMount()) {
+      setAnimate(true);
+      setTimeout(() => {
+        setAnimate(false);
+      }, 500);
+    }
   }, [word]);
 
   return (
@@ -31,7 +36,7 @@ const Word = ({ second }: WordProps) => {
         displayWord ? " text-white bg-gray-600 " : " text-gray-200 bg-gray-100 "
       } ${animate ? " animate-pop " : ""}`}
     >
-      {displayWord ? (second ? secondWord : word) : "impro-training"}
+      {displayWord ? wordToDisplay : "impro-training"}
     </div>
   );
 };

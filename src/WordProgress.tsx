@@ -18,8 +18,10 @@ const WordProgress = () => {
     <div className="mt-1">
       <Progress
         value={display ? wordProgress : null}
-        className="w-[100%] h-2 [&>*]:bg-gray-300"
-      />
+        className="w-[100%] h-6 [&>*]:bg-gray-300"
+      >
+        fjeded rfrf rfrf
+      </Progress>
     </div>
   );
 };
