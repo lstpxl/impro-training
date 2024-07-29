@@ -93,6 +93,7 @@ interface LessonState {
 
   getDisplayedExerciseWordAdvance: () => string | undefined;
   getDisplayedExerciseWordProgress: () => number | undefined;
+  getDisplayedExerciseDoubleWords: () => boolean | undefined;
 }
 
 function calcStatusStr(lessonState: LessonState) {
@@ -326,6 +327,10 @@ const useLessonStore = create<LessonState>()((set, get) => ({
     const exercise = calcDisplayedExercise(get().lesson);
     if (exercise?.wordAdvance !== "auto") return undefined;
     return exercise?.wordInterval;
+  },
+  getDisplayedExerciseDoubleWords: () => {
+    const exercise = calcDisplayedExercise(get().lesson);
+    return exercise?.doubleWords;
   },
   getDisplayedExerciseRemainingTime: () => {
     const exercise = calcDisplayedExercise(get().lesson);

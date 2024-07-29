@@ -4,6 +4,7 @@ export interface ExerciseRule {
   length: number;
   wordAdvance: string;
   wordInterval: number | undefined;
+  doubleWords: boolean | undefined;
   manualScore: boolean;
   description: string;
 }
@@ -14,6 +15,7 @@ export const defaultExerciseRule: ExerciseRule = {
   wordAdvance: "manual",
   manualScore: false,
   wordInterval: undefined,
+  doubleWords: false,
   description: "",
 };
 export interface ExerciseState {

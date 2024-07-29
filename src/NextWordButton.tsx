@@ -15,17 +15,16 @@ const NextWordButton = () => {
   const wordAdvance = useLessonStore((state) =>
     state.getDisplayedExerciseWordAdvance()
   );
+  const doubleWords = useLessonStore((state) =>
+    state.getDisplayedExerciseDoubleWords()
+  );
 
-  console.log("three");
-  console.log(wordAdvance);
-  console.log(isDisplayed);
-  console.log(isRun);
   const display = wordAdvance === "manual" && isDisplayed && isRun;
   if (!display) return null;
   return (
     <Button
       className="text-xl col-start-2 hover:opacity-60"
-      onClick={switchWord}
+      onClick={() => switchWord(doubleWords === true)}
     >
       <ArrowBigRight size={32} className="mr-2" />
       Next word

@@ -8,6 +8,7 @@
       "wordAdvance": "manual",
       "wordInterval": 0,
       "manualScore": false,
+      "scoring": "wpm",
       "description": "по одной ассоциации на каждое слово, цель - как можно больше"
     },
     {
@@ -17,6 +18,7 @@
       "wordAdvance": "auto",
       "wordInterval": 15,
       "manualScore": true,
+      "scoring": "cpw",
       "description": "На каждое слово дается 15 секунд. Цель - озвучить как можно больше ассоциаций к нему. Нажмите «+» за каждое озвученное слово."
     },
     {
@@ -26,6 +28,7 @@
       "wordAdvance": "fivewords",
       "wordInterval": 0,
       "manualScore": true,
+      "scoring": "wpm",
       "description": "придумать пять контекстов или значений для каждого слова, цель - обработать как можно больше слов"
     },
     {
@@ -35,6 +38,7 @@
       "wordAdvance": "none",
       "wordInterval": 0,
       "manualScore": false,
+      "scoring": "none",
       "description": "строим идею и рассказываем её"
     },
     {
@@ -44,6 +48,7 @@
       "wordAdvance": "auto",
       "wordInterval": 15,
       "manualScore": false,
+      "scoring": "none",
       "description": "строить одну идею и рассказывать с использованием этих слов"
     },
     {
@@ -53,6 +58,7 @@
       "wordAdvance": "none",
       "wordInterval": 0,
       "manualScore": false,
+      "scoring": "none",
       "description": "от 1 слова, [безумная] связная история. (усложнение - история из своей жизни)"
     },
     {
@@ -62,6 +68,7 @@
       "wordAdvance": "auto",
       "wordInterval": 30,
       "manualScore": false,
+      "scoring": "none",
       "description": "связная смена темы каждые 30 секунд, [два человека по-очереди]"
     },
     {
@@ -70,7 +77,9 @@
       "length": 120,
       "wordAdvance": "manual",
       "wordInterval": 0,
+      "doubleWords": true,
       "manualScore": false,
+      "scoring": "wpm",
       "description": "придумать и рассказать связь между каждой парой слов, цель - как можно больше"
     }
   ]

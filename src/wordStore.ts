@@ -35,14 +35,19 @@ function getNextWord(wordList: Word[]) {
 interface WordListState {
   wordList: Word[];
   currentWord: string | undefined;
-  switchNextWord: () => void;
+  currentSecondWord: string | undefined;
+  switchNextWord: (double: boolean) => void;
 }
 
 const useWordStore = create<WordListState>()((set) => ({
   wordList: initialWordList,
   currentWord: undefined,
-  switchNextWord: () =>
-    set((state) => ({ currentWord: getNextWord(state.wordList) })),
+  currentSecondWord: undefined,
+  switchNextWord: (double: boolean) =>
+    set((state) => ({
+      currentWord: getNextWord(state.wordList),
+      currentSecondWord: double ? getNextWord(state.wordList) : undefined,
+    })),
 }));
 
 export default useWordStore;
