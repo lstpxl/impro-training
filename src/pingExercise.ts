@@ -1,14 +1,23 @@
 import { ExerciseStorage } from "./Exercise";
 
-export function pingExercise(exercise: ExerciseStorage) {
-  if (!exercise) return {};
-  if (!exercise.isRun) return {};
-  if (!exercise.order) return {};
-  if (!exercise.isDisplayed) return {};
-  if (!exercise.timestampStarted) return {};
+type MutMap = Map<string, string | number | boolean | undefined>;
 
-  const toLesson = {};
-  let toExercise = {};
+export interface PairMutation {
+  toExercise: MutMap | undefined;
+  toLesson: MutMap | undefined;
+}
+
+export function pingExercise(exercise: ExerciseStorage): PairMutation {
+  if (!exercise) return { toExercise: undefined, toLesson: undefined };
+  if (!exercise.isRun) return { toExercise: undefined, toLesson: undefined };
+  if (!exercise.order) return { toExercise: undefined, toLesson: undefined };
+  if (!exercise.isDisplayed)
+    return { toExercise: undefined, toLesson: undefined };
+  if (!exercise.timestampStarted)
+    return { toExercise: undefined, toLesson: undefined };
+
+  const toLesson: MutMap = new Map();
+  const toExercise: MutMap = new Map();
 
   const msPassed = Date.now() - exercise.timestampStarted;
 
@@ -20,22 +29,14 @@ export function pingExercise(exercise: ExerciseStorage) {
     ? Math.round(exercise.length - msPassed / 1000)
     : exercise.length;
 
-  toExercise = {
-    ...toExercise,
-    msPassed: msPassed,
-    timeLeft: timeLeft,
-    progress: newProgress,
-  };
+  toExercise.set("msPassed", msPassed);
+  toExercise.set("timeLeft", timeLeft);
+  toExercise.set("progress", newProgress);
 
   const finished = exercise.length ? msPassed > exercise.length * 1000 : true;
   if (finished) {
-    // console.log("Report to lesson exercise");
-    toExercise = {
-      ...toExercise,
-      isFinished: finished,
-      isRun: !finished,
-      // justFinished: true,
-    };
+    toExercise.set("isFinished", finished);
+    toExercise.set("isRun", !finished);
   } else {
     const newWordNumber =
       exercise.wordAdvance === "auto" && exercise.wordInterval
@@ -48,12 +49,8 @@ export function pingExercise(exercise: ExerciseStorage) {
           100
         : 0;
 
-    toExercise = {
-      ...toExercise,
-      wordNumber: newWordNumber,
-      wordProgress: newWordProgress,
-    };
-    // toLesson = { ...toLesson, wordTimestamp: Date.now() };
+    toExercise.set("wordNumber", newWordNumber);
+    toExercise.set("wordProgress", newWordProgress);
   }
 
   return { toExercise, toLesson };

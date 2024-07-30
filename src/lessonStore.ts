@@ -3,7 +3,7 @@ import { defaultExerciseState, ExerciseStorage } from "./Exercise";
 import defaultLesson from "./default-lesson.json";
 import { jsonClone } from "./lib/baseUtils";
 import { produce } from "immer";
-import { pingExercise } from "./pingExercise";
+import { PairMutation, pingExercise } from "./pingExercise";
 
 interface Lesson {
   name: string;
@@ -236,8 +236,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           !exercise.timestampStarted
         )
           return;
-        const mutation = pingExercise(exercise);
-        if (mutation.toExercise?.isFinished && !exercise.isFinished) {
+        const mutation: PairMutation = pingExercise(exercise);
+        if (mutation.toExercise?.get("isFinished") && !exercise.isFinished) {
           state.finishedTimestamp = Date.now();
         }
         /*         const assignee = calcDisplayedExercise(state.lesson);
@@ -245,12 +245,18 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           ...assignee,
           ...mutation.toLesson,
         }; */
-        for (const [key, value] of Object.entries(mutation.toLesson)) {
+        mutation.toLesson?.forEach((value, key) => {
           state[key] = value;
-        }
-        for (const [key, value] of Object.entries(mutation.toExercise)) {
+        });
+        /*         for (const [key, value] of Object.entries(mutation.toLesson)) {
+          state[key] = value;
+          } */
+        mutation.toExercise?.forEach((value, key) => {
           state.lesson.exercises[exercise.order - 1][key] = value;
-        }
+        });
+        /*         for (const [key, value] of Object.entries(mutation.toExercise)) {
+          state.lesson.exercises[exercise.order - 1][key] = value;
+        } */
       })
     ),
 
