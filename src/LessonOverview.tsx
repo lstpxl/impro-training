@@ -72,16 +72,8 @@ const LessonOverview = () => {
               {filled ? lessonName : undefined}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className="grid gap-1 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                {/*                 <li href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
-                </li>
-                <li href="/docs/installation" title="Installation">
-                  How to install dependencies and structure your app.
-                </li>
-                <li href="/docs/primitives/typography" title="Typography">
-                  Styles for headings, paragraphs, lists...etc
-                </li> */}
+              {/* grid-flow-col auto-rows-auto  */}
+              <ul className="grid gap-1 p-4 md:w-[400px] lg:w-[600px] lg:grid-cols-2">
                 {exerciseList.map((exercise: ExShort) => (
                   <li
                     key={exercise.order}
