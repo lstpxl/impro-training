@@ -33,13 +33,13 @@
     },
     {
       "order": 40,
-      "name": "идейная импровизация от 1 слова",
+      "name": "идейная импровизация",
       "length": 90,
       "wordAdvance": "none",
       "wordInterval": 0,
       "manualScore": false,
       "scoring": "none",
-      "description": "строим идею и рассказываем её"
+      "description": "строим идею от 1 слова и рассказываем её"
     },
     {
       "order": 50,

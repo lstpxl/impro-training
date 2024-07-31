@@ -7,6 +7,7 @@ export interface ExerciseRule {
   doubleWords: boolean | undefined;
   manualScore: boolean;
   description: string;
+  scoring: string;
 }
 export const defaultExerciseRule: ExerciseRule = {
   order: 0,
@@ -17,6 +18,7 @@ export const defaultExerciseRule: ExerciseRule = {
   wordInterval: undefined,
   doubleWords: false,
   description: "",
+  scoring: "none",
 };
 export interface ExerciseState {
   isDisplayed: boolean;
@@ -32,6 +34,7 @@ export interface ExerciseState {
   timeLeft: number | undefined;
   wordNumber: number;
   scoreCount: number;
+  wordCount: number;
   msPassed: number;
 }
 export const defaultExerciseState: ExerciseState = {
@@ -48,6 +51,7 @@ export const defaultExerciseState: ExerciseState = {
   wordNumber: 0,
   wordProgress: 0,
   scoreCount: 0,
+  wordCount: 0,
   msPassed: 0,
 };
 

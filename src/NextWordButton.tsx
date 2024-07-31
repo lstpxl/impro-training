@@ -5,6 +5,7 @@ import useLessonStore from "./lessonStore";
 
 const NextWordButton = () => {
   const switchWord = useWordStore((state) => state.switchNextWord);
+  const addWordCount = useLessonStore((state) => state.addWordCount);
 
   const isDisplayed = useLessonStore((state) =>
     state.getIsAnyExerciseDisplayed()
@@ -24,7 +25,10 @@ const NextWordButton = () => {
   return (
     <Button
       className="text-xl col-start-2 hover:opacity-60"
-      onClick={() => switchWord(doubleWords === true)}
+      onClick={() => {
+        switchWord(doubleWords === true);
+        addWordCount();
+      }}
     >
       <ArrowBigRight size={32} className="mr-2" />
       Next word

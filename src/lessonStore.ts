@@ -4,6 +4,8 @@ import defaultLesson from "./default-lesson.json";
 import { jsonClone } from "./lib/baseUtils";
 import { produce } from "immer";
 import { PairMutation, pingExercise } from "./pingExercise";
+import { ExerciseScore } from "./ExerciseScore";
+import { calcScore } from "./calcScore";
 
 interface Lesson {
   name: string;
@@ -50,6 +52,7 @@ interface LessonState {
   finishedTimestamp: number | undefined;
   wordTimestamp: number | undefined;
   globalScoreCount: number;
+  scores: ExerciseScore[];
 
   init: () => void;
   start: () => void;
@@ -94,6 +97,8 @@ interface LessonState {
   getDisplayedExerciseWordAdvance: () => string | undefined;
   getDisplayedExerciseWordProgress: () => number | undefined;
   getDisplayedExerciseDoubleWords: () => boolean | undefined;
+
+  addWordCount: () => void;
 }
 
 function calcStatusStr(lessonState: LessonState) {
@@ -161,6 +166,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   finishedTimestamp: undefined,
   wordTimestamp: undefined,
   globalScoreCount: 0,
+  scores: [],
   init: () =>
     set((state) => {
       const newLesson = getInitialLesson();
@@ -245,14 +251,18 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           ...assignee,
           ...mutation.toLesson,
         }; */
-        mutation.toLesson?.forEach((value, key) => {
-          state[key] = value;
-        });
         /*         for (const [key, value] of Object.entries(mutation.toLesson)) {
           state[key] = value;
           } */
+        if (mutation.toExercise?.get("isFinished") && !exercise.isFinished) {
+          const score = calcScore(exercise);
+          state.scores.push(score);
+        }
         mutation.toExercise?.forEach((value, key) => {
           state.lesson.exercises[exercise.order - 1][key] = value;
+        });
+        mutation.toLesson?.forEach((value, key) => {
+          state[key] = value;
         });
         /*         for (const [key, value] of Object.entries(mutation.toExercise)) {
           state.lesson.exercises[exercise.order - 1][key] = value;
@@ -306,6 +316,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           exercise.isRun = true;
           exercise.timestampStarted = Date.now();
           exercise.wordNumber = 1;
+          exercise.wordCount = 0;
         }
       })
     ),
@@ -397,6 +408,15 @@ const useLessonStore = create<LessonState>()((set, get) => ({
             exercise.wordNumber++;
           }
         }
+      })
+    ),
+  addWordCount: () =>
+    set(
+      produce((state) => {
+        if (!state.lesson?.exercises?.length) return;
+        const exercise = calcDisplayedExercise(state.lesson);
+        if (!exercise) return;
+        if (exercise) exercise.wordCount++;
       })
     ),
   getDisplayedExerciseIsAutoWordAdvance: () => {

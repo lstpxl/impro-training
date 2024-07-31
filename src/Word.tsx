@@ -36,7 +36,7 @@ const Word = ({ second }: WordProps) => {
         displayWord ? " text-white bg-gray-600 " : " text-gray-200 bg-gray-100 "
       } ${animate ? " animate-pop " : ""}`}
     >
-      {displayWord ? wordToDisplay : "impro-training"}
+      {displayWord ? wordToDisplay : "impro 🙊 training"}
     </div>
   );
 };
