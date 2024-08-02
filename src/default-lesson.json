@@ -28,7 +28,7 @@
       "wordAdvance": "fivewords",
       "wordInterval": 0,
       "manualScore": true,
-      "scoring": "wpm",
+      "scoring": "wpm5",
       "description": "придумать пять контекстов или значений для каждого слова, цель - обработать как можно больше слов"
     },
     {

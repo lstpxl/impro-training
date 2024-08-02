@@ -4,6 +4,7 @@ import useLessonStore from "./lessonStore";
 
 function getFullScoring(short: string): string | undefined {
   if (short === "wpm") return "words per minute";
+  if (short === "wpm5") return "words per minute*";
   if (short === "cpw") return "clicks per word";
   if (short === "none") return "completed or not";
   return undefined;
@@ -38,6 +39,8 @@ const Stats = () => {
   const filtered = scores.filter(
     (score) => score.timestamp > Date.now() - 1000 * 60 * 60 * 2
   );
+
+  // store filtered to localStorage
 
   if (!filtered.length) return null;
 
