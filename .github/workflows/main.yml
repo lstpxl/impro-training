@@ -1,4 +1,4 @@
-name: Deploy with GitHub Pages 1
+name: Deploy with GitHub Pages 2
 
 on:
   # Runs on pushes targeting the default branch
@@ -23,7 +23,6 @@ concurrency:
 
 jobs:
   # Build job
-
   build:
     runs-on: ubuntu-latest
     environment: github-pages
@@ -37,12 +36,10 @@ jobs:
           cache: "npm"
       - name: Install dependencies
         run: npm ci
-      - name: Test environment variable
-        run: echo "The value of TEST_ENV_VAR is ${{ vars.TEST_ENV_VAR }}"
       - name: Build
         run: npm run build
         env:
-          VITE_BASE_URL: ${{ vars.BASE_URL }}
+          VITE_BASE_URL: ${{ vars.VITE_BASE_URL }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
