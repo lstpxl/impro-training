@@ -5,24 +5,9 @@ import react from "@vitejs/plugin-react";
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }) => {
   const env = loadEnv(mode, process.cwd());
-  process.env = { ...process.env, ...env };
-
-  // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-  console.log("import.meta.env?.BASE_URL=", import.meta.env?.BASE_URL);
-
-  console.log(
-    "import.meta.env?.VITE_BASE_URL=",
-    // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-    import.meta.env?.VITE_BASE_URL
-  );
-  // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-  console.log("import.meta.env?.VITE_DEP_URL=", import.meta.env?.VITE_DEP_URL);
-  // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-  console.log("import.meta.env=", import.meta.env);
-
+  // process.env = { ...process.env, ...env };
   console.log("mode=", mode);
   console.log("env=", env);
-  // console.log("process.env=", process.env);
 
   return defineConfig({
     plugins: [react()],
@@ -31,7 +16,6 @@ export default ({ mode }: { mode: string }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-    // base: import.meta.env.VITE_BASE_URL,
     base: env.VITE_BASE_URL,
   });
 };
