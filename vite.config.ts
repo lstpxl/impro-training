@@ -20,6 +20,7 @@ export default ({ mode }: { mode: string }) => {
   // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
   console.log("import.meta.env=", import.meta.env);
 
+  console.log("mode=", mode);
   console.log("env=", env);
 
   return defineConfig({
