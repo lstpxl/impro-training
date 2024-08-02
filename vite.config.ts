@@ -22,7 +22,7 @@ export default ({ mode }: { mode: string }) => {
 
   console.log("mode=", mode);
   console.log("env=", env);
-  console.log("process.env=", process.env);
+  // console.log("process.env=", process.env);
 
   return defineConfig({
     plugins: [react()],
@@ -31,7 +31,7 @@ export default ({ mode }: { mode: string }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
-    // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-    base: import.meta.env.VITE_BASE_URL,
+    // base: import.meta.env.VITE_BASE_URL,
+    base: env.VITE_BASE_URL,
   });
 };
