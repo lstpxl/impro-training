@@ -43,6 +43,9 @@ jobs:
         run: echo "The value of BASE_URL is ${{ vars.BASE_URL }}"
       - name: Build
         run: npm run build
+        env:
+          VITE_BASE_URL: ${{ vars.BASE_URL }}
+          HELLO: world
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
