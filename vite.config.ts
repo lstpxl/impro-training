@@ -7,11 +7,17 @@ export default ({ mode }: { mode: string }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-  console.log("import.meta.env.BASE_URL=", import.meta.env.BASE_URL);
+  console.log("import.meta.env?.BASE_URL=", import.meta.env?.BASE_URL);
+
+  console.log(
+    "import.meta.env?.VITE_BASE_URL=",
+    // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
+    import.meta.env?.VITE_BASE_URL
+  );
   // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-  console.log("import.meta.env.VITE_BASE_URL=", import.meta.env.VITE_BASE_URL);
+  console.log("import.meta.env?.VITE_DEP_URL=", import.meta.env?.VITE_DEP_URL);
   // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-  console.log("import.meta.env.VITE_DEP_URL=", import.meta.env.VITE_DEP_URL);
+  console.log("import.meta.env=", import.meta.env);
 
   return defineConfig({
     plugins: [react()],
@@ -21,6 +27,6 @@ export default ({ mode }: { mode: string }) => {
       },
     },
     // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
-    base: import.meta.env.BASE_URL,
+    base: import.meta.env.VITE_BASE_URL,
   });
 };

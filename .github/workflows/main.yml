@@ -40,7 +40,7 @@ jobs:
       - name: Use environment variable 2
         run: echo "The value of VITE_DEP_URL is ${{ vars.VITE_DEP_URL }}"
       - name: Use environment variable 3
-        run: echo "The value of VITE_DEP_URL is ${{ vars.BASE_URL }}"
+        run: echo "The value of BASE_URL is ${{ vars.BASE_URL }}"
       - name: Build
         run: npm run build
       - name: Upload artifact
