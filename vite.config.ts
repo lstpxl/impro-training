@@ -22,6 +22,7 @@ export default ({ mode }: { mode: string }) => {
 
   console.log("mode=", mode);
   console.log("env=", env);
+  console.log("process.env=", process.env);
 
   return defineConfig({
     plugins: [react()],
