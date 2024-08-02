@@ -10,4 +10,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // @ts-expect-error Property 'env' does not exist on type 'ImportMeta'.ts
+  base: import.meta.env.BASE_URL,
 });
