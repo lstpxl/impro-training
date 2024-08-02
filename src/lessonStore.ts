@@ -6,6 +6,7 @@ import { produce } from "immer";
 import { PairMutation, pingExercise } from "./pingExercise";
 import { ExerciseScore } from "./ExerciseScore";
 import { calcScore } from "./calcScore";
+import { loadDataFromLocalStorage, saveDataToLocalStorage } from "./storage";
 
 interface Lesson {
   name: string;
@@ -166,7 +167,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   finishedTimestamp: undefined,
   wordTimestamp: undefined,
   globalScoreCount: 0,
-  scores: [],
+  scores: loadDataFromLocalStorage(),
   init: () =>
     set((state) => {
       const newLesson = getInitialLesson();
@@ -202,23 +203,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           console.log(nextExercise);
           nextExercise.isDisplayed = true;
           nextExercise.isRun = false;
-          // nextExercise.wordNumber = 1;
         }
-        /*       const newActiveExercise = state?.lesson?.exercises.filter(
-        (exercise: ExerciseStorage): ExerciseStorage | undefined =>
-          exercise.isDisplayed ? acc : exercise,
-        undefined
-      ); */
         const newStatus = calcStatusStr(state);
-        // console.log("status calculated", newStatus);
-        /*         return {
-          ...state,
-          isStarted: true,
-          timestampStarted: Date.now(),
-          progress: 2,
-          status: newStatus,
-          activeExercise: nextExercise,
-        }; */
         state.isStarted = true;
         state.timestampStarted = Date.now();
         state.progress = 0;
@@ -246,17 +232,10 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         if (mutation.toExercise?.get("isFinished") && !exercise.isFinished) {
           state.finishedTimestamp = Date.now();
         }
-        /*         const assignee = calcDisplayedExercise(state.lesson);
-        state.lesson.exercises[exercise.order - 1] = {
-          ...assignee,
-          ...mutation.toLesson,
-        }; */
-        /*         for (const [key, value] of Object.entries(mutation.toLesson)) {
-          state[key] = value;
-          } */
         if (mutation.toExercise?.get("isFinished") && !exercise.isFinished) {
           const score = calcScore(exercise);
           state.scores.push(score);
+          saveDataToLocalStorage(state.scores);
         }
         mutation.toExercise?.forEach((value, key) => {
           state.lesson.exercises[exercise.order - 1][key] = value;
@@ -264,9 +243,6 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         mutation.toLesson?.forEach((value, key) => {
           state[key] = value;
         });
-        /*         for (const [key, value] of Object.entries(mutation.toExercise)) {
-          state.lesson.exercises[exercise.order - 1][key] = value;
-        } */
       })
     ),
 
@@ -435,15 +411,6 @@ export function useLessonActiveExerciseOrder() {
     undefined
   );
 }
-
-/* export function useLessonActiveExercise(): ExerciseStorage | undefined {
-  const lesson = useLessonStore((state) => state.lesson);
-  return lesson?.exercises?.reduce(
-    (acc: ExerciseStorage | undefined, exercise: ExerciseStorage) =>
-      exercise.isDisplayed ? exercise : acc,
-    undefined
-  );
-} */
 
 export function useNextUnisFinishedExercise() {
   const lesson = useLessonStore((state) => state.lesson);

@@ -3,6 +3,7 @@
   "exercises": [
     {
       "order": 10,
+      "code": "ping",
       "name": "пинг-понг",
       "length": 60,
       "wordAdvance": "manual",
@@ -13,6 +14,7 @@
     },
     {
       "order": 22,
+      "code": "max",
       "name": "максимум",
       "length": 90,
       "wordAdvance": "auto",
@@ -23,6 +25,7 @@
     },
     {
       "order": 30,
+      "code": "five",
       "name": "пять типов",
       "length": 120,
       "wordAdvance": "fivewords",
@@ -33,6 +36,7 @@
     },
     {
       "order": 40,
+      "code": "idea",
       "name": "идейная импровизация",
       "length": 90,
       "wordAdvance": "none",
@@ -43,6 +47,7 @@
     },
     {
       "order": 50,
+      "code": "usewords",
       "name": "новое слово каждые 15 секунд",
       "length": 150,
       "wordAdvance": "auto",
@@ -53,6 +58,7 @@
     },
     {
       "order": 60,
+      "code": "dream",
       "name": "сон / поток свободных ассоциаций",
       "length": 120,
       "wordAdvance": "none",
@@ -63,6 +69,7 @@
     },
     {
       "order": 70,
+      "code": "stream",
       "name": "потоковая импровизация",
       "length": 120,
       "wordAdvance": "auto",
@@ -73,6 +80,7 @@
     },
     {
       "order": 80,
+      "code": "link",
       "name": "связь",
       "length": 120,
       "wordAdvance": "manual",

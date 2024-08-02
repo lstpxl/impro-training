@@ -27,6 +27,7 @@ export function calcScore(exercise: ExerciseStorage): ExerciseScore {
   }
   return {
     exerciseId: exercise.order,
+    code: exercise.code,
     name: exercise.name,
     scoring: exercise.scoring,
     value: score,

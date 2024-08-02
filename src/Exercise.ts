@@ -1,5 +1,6 @@
 export interface ExerciseRule {
   order: number;
+  code: string;
   name: string;
   length: number;
   wordAdvance: string;
@@ -11,6 +12,7 @@ export interface ExerciseRule {
 }
 export const defaultExerciseRule: ExerciseRule = {
   order: 0,
+  code: "",
   name: "",
   length: 0,
   wordAdvance: "manual",
