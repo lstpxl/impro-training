@@ -120,13 +120,16 @@ function calcDisplayedExercise(
   lesson: Lesson | undefined
 ): ExerciseStorage | undefined {
   if (!lesson) return undefined;
-  return lesson.exercises.reduce(
+  /*   return lesson.exercises.reduce(
     (
       acc: ExerciseStorage | undefined,
       exercise: ExerciseStorage
     ): ExerciseStorage | undefined =>
       acc !== undefined ? acc : exercise.isDisplayed ? exercise : acc,
     undefined
+  ); */
+  return lesson?.exercises.find(
+    (exercise: ExerciseStorage) => exercise.isDisplayed
   );
 }
 
