@@ -28,7 +28,7 @@ const Word = ({ second }: WordProps) => {
         setAnimate(false);
       }, 500);
     }
-  }, [word]);
+  }, [word, didMount]);
 
   return (
     <div
