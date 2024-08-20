@@ -296,6 +296,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           exercise.timestampStarted = Date.now();
           exercise.wordNumber = 1;
           exercise.wordCount = 0;
+          exercise.scoreCount = 0;
         }
       })
     ),
