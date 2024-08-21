@@ -11,7 +11,6 @@ function getFullScoring(short: string): string | undefined {
 }
 
 const SingleScore = ({ data }: { data: ExerciseScore }) => {
-  console.log(data);
   const unit = getFullScoring(data.scoring);
   const displayValue = data.scoring !== "none";
   return (
@@ -39,8 +38,6 @@ const Stats = () => {
   const filtered = scores.filter(
     (score) => score.timestamp > Date.now() - 1000 * 60 * 60 * 2
   );
-
-  // store filtered to localStorage
 
   if (!filtered.length) return null;
 

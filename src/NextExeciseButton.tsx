@@ -13,13 +13,11 @@ const NextExerciseButton = () => {
     state.getIsDisplayedExerciseRunning()
   );
   const nextOrder = useLessonStore((state) => state.getNextExerciseOrder());
-  // const goNext = useLessonStore((state) => state.goNext);
   const jumpToExercise = useLessonStore((state) => state.jumpToExercise);
-
-  console.log("nextOrder", nextOrder);
 
   if (!isDisplayed || !isFinished || isRun || nextOrder === undefined)
     return null;
+
   return (
     <Button
       className="text-lg col-start-3 hover:opacity-60"

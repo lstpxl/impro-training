@@ -13,11 +13,7 @@ const LessonOverview = () => {
     state.getNumExercisesTotal()
   );
   const filled = numExercisesTotal && numExercisesTotal > 0;
-  // const isStarted = useLessonStore((state) => state.isStarted);
   const lessonName = useLessonStore((state) => state.getLessonName());
-  /*   const activeOrder = useLessonStore((state) =>
-    state.getDisplayedExerciseOrder()
-  ); */
   const exerciseListStr = useLessonStore((state) =>
     state.getExerciseListJson()
   );
@@ -25,7 +21,6 @@ const LessonOverview = () => {
   const exerciseList = exerciseListStr ? JSON.parse(exerciseListStr) : [];
 
   function handleJumpToExercise(order: number) {
-    // console.log("TODO jump to ", order);
     jumpToExercise(Number(order));
   }
 
@@ -34,37 +29,8 @@ const LessonOverview = () => {
     name: string;
   }
 
-  /*   console.log("activeOrder", activeOrder);
-  console.log("filled", filled);
-  console.log("isStarted", isStarted);
-  console.log("lessonName", lessonName);
- */
   return (
     <div>
-      {/* <Select
-        onValueChange={handleJumpToExercise}
-        defaultValue={filled ? String(1) : undefined}
-        value={
-          activeOrder
-            ? String(activeOrder)
-            : undefined 
-        }
-      >
-        <SelectTrigger className="w-[400px]">
-          <SelectValue placeholder={isStarted ? undefined : lessonName} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-
-            {exerciseList.map((exercise: ExShort) => (
-              <SelectItem
-                key={exercise.order}
-                value={String(exercise.order)}
-              >{`${String(exercise.order)}) ${exercise.name}`}</SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select> */}
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -72,7 +38,6 @@ const LessonOverview = () => {
               {filled ? lessonName : undefined}
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              {/* grid-flow-col auto-rows-auto  */}
               <ul className="grid gap-1 p-4 md:w-[400px] lg:w-[600px] lg:grid-cols-2">
                 {exerciseList.map((exercise: ExShort) => (
                   <li

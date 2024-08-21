@@ -8,7 +8,7 @@ import LessonOverview from "./LessonOverview";
 const LessonSection = () => {
   const isStarted = useLessonStore((state) => state.isStarted);
   const start = useLessonStore((state) => state.start);
-  const reset = useLessonStore((state) => state.init);
+  const reset = useLessonStore((state) => state.restart);
 
   return (
     <section id="lesson" className="bg-gray-50 rounded-md p-4">

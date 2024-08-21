@@ -18,7 +18,6 @@ const useExerciseStore = create<ExerciseFullState>()((set) => ({
   ...defaultExerciseState,
   start: () =>
     set((state) => {
-      console.log("ex state before start", state);
       return {
         ...state,
         isDisplayed: true,
@@ -50,7 +49,6 @@ const useExerciseStore = create<ExerciseFullState>()((set) => ({
           ? Math.round(state.length - msPassed / 1000)
           : state.length;
         if (finished) {
-          console.log("Report to lesson state");
           if (!state.isFinished) {
             // TODO
             // report that ex is isFinished
@@ -87,8 +85,6 @@ const useExerciseStore = create<ExerciseFullState>()((set) => ({
   //   set(() => ({ ...newExercise, isDisplayed: false, time: 0 })),
   setExercise: (newExercise: ExerciseStorage) =>
     set((state) => {
-      console.log("setting whole exercise state");
-      console.log(newExercise);
       // return { ...newExercise, name: "boooo", isDisplayed: false, time: 0 };
       return {
         ...state,

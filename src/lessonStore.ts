@@ -44,18 +44,19 @@ function getInitialLesson() {
 interface LessonState {
   lesson: Lesson | undefined;
   isStarted: boolean;
-  length: number;
-  timestampStarted: number | undefined;
-  lengthisFinished: number;
+  length: number | undefined;
+  // timestampStarted: number | undefined;
+  // lengthisFinished: number;
   progress: number | undefined;
-  status: string;
-  activeExercise: ExerciseStorage | undefined;
+  // status: string;
+  // activeExercise: ExerciseStorage | undefined;
   finishedTimestamp: number | undefined;
-  wordTimestamp: number | undefined;
-  globalScoreCount: number;
+  // wordTimestamp: number | undefined;
+  scoreAddedTrigger: number;
   scores: ExerciseScore[];
 
-  init: () => void;
+  // init: () => void;
+  restart: () => void;
   start: () => void;
   abort: () => void;
   ping: () => void;
@@ -102,32 +103,10 @@ interface LessonState {
   addWordCount: () => void;
 }
 
-function calcStatusStr(lessonState: LessonState) {
-  const exercises = lessonState?.lesson?.exercises;
-  if (!exercises) return "";
-  // console.log("calc status", exercises);
-  return exercises.reduce(
-    (acc: string, exercise: ExerciseStorage, index: number): string =>
-      acc.concat(
-        index !== 0 ? "," : "",
-        exercise.isFinished ? "f" : exercise.isDisplayed ? "a" : "q"
-      ),
-    ""
-  );
-}
-
 function calcDisplayedExercise(
   lesson: Lesson | undefined
 ): ExerciseStorage | undefined {
   if (!lesson) return undefined;
-  /*   return lesson.exercises.reduce(
-    (
-      acc: ExerciseStorage | undefined,
-      exercise: ExerciseStorage
-    ): ExerciseStorage | undefined =>
-      acc !== undefined ? acc : exercise.isDisplayed ? exercise : acc,
-    undefined
-  ); */
   return lesson?.exercises.find(
     (exercise: ExerciseStorage) => exercise.isDisplayed
   );
@@ -159,30 +138,30 @@ function calcNextExerciseOrder(lesson: Lesson | undefined): number | undefined {
 }
 
 const useLessonStore = create<LessonState>()((set, get) => ({
-  lesson: undefined,
+  lesson: getInitialLesson(),
   isStarted: false,
-  length: 0,
-  lengthisFinished: 0,
-  timestampStarted: undefined,
+  length: getLessonLength(getInitialLesson()),
+  // lengthisFinished: 0,
+  // timestampStarted: undefined,
   progress: undefined,
-  status: "",
-  activeExercise: undefined,
+  // status: "",
+  // activeExercise: undefined,
   finishedTimestamp: undefined,
-  wordTimestamp: undefined,
-  globalScoreCount: 0,
+  // wordTimestamp: undefined,
+  scoreAddedTrigger: 0,
   scores: loadDataFromLocalStorage(),
-  init: () =>
+  restart: () =>
     set((state) => {
       const newLesson = getInitialLesson();
-      const newStatus = calcStatusStr(state);
+      // const newStatus = calcStatusStr(state);
       return {
         ...state,
         lesson: newLesson,
         length: getLessonLength(newLesson),
-        lengthisFinished: 0,
+        // lengthisFinished: 0,
         isStarted: false,
-        timestampStarted: undefined,
-        status: newStatus,
+        // timestampStarted: undefined,
+        // status: newStatus,
         progress: undefined,
         activeExercise: newLesson[0],
       };
@@ -198,21 +177,20 @@ const useLessonStore = create<LessonState>()((set, get) => ({
             acc !== undefined ? acc : exercise.isFinished ? acc : exercise,
           undefined
         );
-        if (state.activeExercise) {
+        /*         if (state.activeExercise) {
           state.activeExercise.isDisplayed = false;
           state.activeExercise.isRun = false;
-        }
+        } */
         if (nextExercise) {
-          console.log(nextExercise);
           nextExercise.isDisplayed = true;
           nextExercise.isRun = false;
         }
-        const newStatus = calcStatusStr(state);
+        // const newStatus = calcStatusStr(state);
         state.isStarted = true;
-        state.timestampStarted = Date.now();
+        // state.timestampStarted = Date.now();
         state.progress = 0;
-        state.status = newStatus;
-        state.activeExercise = nextExercise;
+        // state.status = newStatus;
+        // state.activeExercise = nextExercise;
       })
     ),
   abort: () => set((state) => ({ ...state, isStarted: false, time: 0 })),
@@ -382,7 +360,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         const exercise = calcDisplayedExercise(state.lesson);
         if (!exercise) return;
         if (exercise) exercise.scoreCount++;
-        state.globalScoreCount++;
+        state.scoreAddedTrigger++;
         if (exercise.wordAdvance === "fivewords") {
           if (exercise.scoreCount % 5 === 0) {
             exercise.wordNumber++;
@@ -407,16 +385,16 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   },
 }));
 
-export function useLessonActiveExerciseOrder() {
+/* export function useLessonActiveExerciseOrder() {
   const lesson = useLessonStore((state) => state.lesson);
   return lesson?.exercises.reduce(
     (acc: number | undefined, exercise: ExerciseStorage) =>
       exercise.isDisplayed ? exercise.order : acc,
     undefined
   );
-}
+} */
 
-export function useNextUnisFinishedExercise() {
+/* export function useNextUnisFinishedExercise() {
   const lesson = useLessonStore((state) => state.lesson);
   return lesson?.exercises.reduce(
     (
@@ -426,9 +404,9 @@ export function useNextUnisFinishedExercise() {
       acc !== undefined ? acc : exercise.isFinished ? acc : exercise,
     undefined
   );
-}
+} */
 
-export function getExerciseWithOrder(
+/* export function getExerciseWithOrder(
   exercises: ExerciseStorage[],
   order: number
 ): ExerciseStorage | undefined {
@@ -437,18 +415,18 @@ export function getExerciseWithOrder(
   );
   if (filtered?.length >= 1) return filtered[0];
   return undefined;
-}
+} */
 
-export function useActiveExerciseOrder(): number | undefined {
+/* export function useActiveExerciseOrder(): number | undefined {
   const lesson = useLessonStore((state) => state.lesson);
   return lesson?.exercises.reduce(
     (acc: number | undefined, exercise: ExerciseStorage): number | undefined =>
       acc !== undefined ? acc : exercise.isDisplayed ? exercise.order : acc,
     undefined
   );
-}
+} */
 
-export function useLessonStatusCode(): string {
+/* export function useLessonStatusCode(): string {
   const lesson = useLessonStore((state) => state.lesson);
   if (!lesson || !lesson.exercises) return "";
   return lesson.exercises.reduce(
@@ -460,6 +438,6 @@ export function useLessonStatusCode(): string {
         : "q",
     ""
   );
-}
+} */
 
 export default useLessonStore;

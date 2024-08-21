@@ -18,7 +18,6 @@ const initialWordList = rawWordList.map((item) => ({
 }));
 
 function getNextWord(wordList: Word[]) {
-  console.log("word switch?!!!!!!");
   if (wordList.length < 1) return undefined;
   let filtered = wordList.filter((element) => element.used !== true);
   if (wordList.length < 1) {

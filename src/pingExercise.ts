@@ -8,7 +8,6 @@ export interface PairMutation {
 }
 
 export function pingExercise(exercise: ExerciseStorage): PairMutation {
-  // console.log(exercise);
   if (!exercise) return { toExercise: undefined, toLesson: undefined };
   if (!exercise.isRun) return { toExercise: undefined, toLesson: undefined };
   if (!exercise.order) return { toExercise: undefined, toLesson: undefined };
@@ -22,7 +21,6 @@ export function pingExercise(exercise: ExerciseStorage): PairMutation {
 
   const msPassed = Date.now() - exercise.timestampStarted;
 
-  // const newTimer = Math.round(msPassed / 1000);
   const newProgress = exercise.length
     ? (msPassed / (exercise.length * 1000)) * 100
     : undefined;

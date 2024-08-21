@@ -18,6 +18,6 @@ export function saveDataToLocalStorage(data: ExerciseScore[]) {
     const serialized = JSON.stringify(data);
     localStorage.setItem(collectionLocalStorageKey, serialized);
   } catch (e) {
-    console.log("Error saving data to local storage.");
+    console.error("Error saving data to local storage.");
   }
 }
