@@ -60,6 +60,7 @@ interface LessonState {
   start: () => void;
   abort: () => void;
   ping: () => void;
+  abortExercise: () => void;
 
   getTotalLength: () => number | undefined;
   getPassedLength: () => number;
@@ -194,6 +195,23 @@ const useLessonStore = create<LessonState>()((set, get) => ({
       })
     ),
   abort: () => set((state) => ({ ...state, isStarted: false, time: 0 })),
+  abortExercise: () =>
+    set(
+      produce((state) => {
+        if (!state.lesson?.exercises?.length) return;
+        const exercise = calcDisplayedExercise(state.lesson);
+        if (exercise) {
+          exercise.isRun = false;
+          exercise.timestampStarted = undefined;
+          exercise.wordNumber = 0;
+          exercise.wordCount = 0;
+          exercise.wordProgress = 0;
+          exercise.scoreCount = 0;
+          exercise.msPassed = 0;
+          exercise.progress = 0;
+        }
+      })
+    ),
   ping: () =>
     set(
       produce((state) => {
@@ -328,7 +346,11 @@ const useLessonStore = create<LessonState>()((set, get) => ({
     const exercises = get().lesson?.exercises;
     if (exercises === undefined) return undefined;
     const list = exercises.map(
-      (exercise) => ({ order: exercise.order, name: exercise.name }),
+      (exercise) => ({
+        order: exercise.order,
+        name: exercise.name,
+        finished: exercise.isFinished,
+      }),
       []
     );
     return JSON.stringify(list);

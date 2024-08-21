@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, Trophy } from "lucide-react";
 import { ExerciseScore } from "./ExerciseScore";
 import useLessonStore from "./lessonStore";
 
@@ -49,8 +49,8 @@ const Stats = () => {
         </div>
       ) : (
         <div className="text-gray-500 grid grid-cols-[40px_1fr_1fr] text-xs ">
-          <div className="col-span-3 mb-4 text-sm">
-            Current lesson statistics:
+          <div className="col-span-3 mb-4 text-sm flex gap-4">
+            <Trophy size={20} className="" /> Current lesson statistics:
           </div>
           {filtered.map((score, index) => (
             <SingleScore key={index} data={score} />

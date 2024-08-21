@@ -1,4 +1,4 @@
-import { Play, RotateCcw } from "lucide-react";
+import { CircleStop, Play } from "lucide-react";
 import { Button } from "./components/ui/button";
 
 import useLessonStore from "./lessonStore";
@@ -14,6 +14,7 @@ const LessonSection = () => {
     <section id="lesson" className="bg-gray-50 rounded-md p-4">
       <div className="flex justify-between items-center gap-4">
         <LessonOverview />
+
         <div className="flex justify-between items-center gap-2">
           {isStarted ? (
             <Button
@@ -21,7 +22,7 @@ const LessonSection = () => {
               className="hover:bg-gray-300 px-3 py-1"
               onClick={reset}
             >
-              <RotateCcw size={20} className="mr-2" /> Restart lesson
+              <CircleStop size={20} className="mr-2" /> Quit lesson
             </Button>
           ) : (
             <Button className="hover:bg-gray-300 px-4 py-1" onClick={start}>

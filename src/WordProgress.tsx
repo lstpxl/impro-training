@@ -18,7 +18,7 @@ const WordProgress = () => {
     <div className="mt-1">
       <Progress
         value={display ? wordProgress : null}
-        className="w-[100%] h-1 [&>*]:bg-gray-300"
+        className={`w-[100%] h-1 bg-gray-300 ${display ? "" : "opacity-0"}`}
       ></Progress>
     </div>
   );

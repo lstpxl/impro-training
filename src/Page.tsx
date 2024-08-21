@@ -9,7 +9,7 @@ import Stats from "./Stats";
 
 const Page = () => {
   return (
-    <div className="max-w-screen-lg flex flex-col w-full md:w-[768px] gap-4 ">
+    <div className="max-w-screen-lg flex flex-col w-full md:w-[768px] gap-6 ">
       <Header />
       <LessonSection />
       <Welcome />
