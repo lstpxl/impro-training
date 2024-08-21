@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import useWordStore from "./wordStore";
 import useLessonStore from "./lessonStore";
-import { useDidMount } from "./lib/useDidMount";
+// import { useDidMount } from "./lib/useDidMount";
 
 interface WordProps {
   second: boolean;
 }
 const Word = ({ second }: WordProps) => {
-  const didMount = useDidMount();
+  // const didMount = useDidMount();
   const word = useWordStore((state) => state.currentWord);
   const secondWord = useWordStore((state) => state.currentSecondWord);
   const wordToDisplay = second ? secondWord : word;
   const [animate, setAnimate] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
   const isDisplayed = useLessonStore((state) =>
     state.getIsAnyExerciseDisplayed()
   );
@@ -22,13 +23,19 @@ const Word = ({ second }: WordProps) => {
 
   useEffect(() => {
     // TODO start animation from beginning on refresh
-    if (didMount()) {
+    if (!firstTime) {
       setAnimate(true);
+      // console.log("start animation");
       setTimeout(() => {
         setAnimate(false);
+        // console.log("stop animation");
       }, 500);
+    } else {
+      setFirstTime(false);
     }
-  }, [word, didMount]);
+  }, [word, firstTime]);
+
+  // console.log("animate=", animate);
 
   return (
     <div
