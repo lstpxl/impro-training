@@ -25,7 +25,6 @@ interface ContentItemProps {
 const ContentItem = ({ exercise, onClick }: ContentItemProps) => {
   return (
     <li
-      key={exercise.order}
       value={String(exercise.order)}
       onClick={() => onClick(exercise.order)}
       className="rounded-lg hover:bg-gray-100 cursor-pointer p-2 text-sm flex justify-between items-center gap-2"
@@ -78,6 +77,7 @@ const LessonOverview = () => {
             <ul className="grid gap-1 lg:grid-cols-2">
               {exerciseList.map((exercise: ExShort) => (
                 <ContentItem
+                  key={exercise.order}
                   exercise={exercise}
                   onClick={handleJumpToExercise}
                 />

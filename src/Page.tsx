@@ -6,6 +6,7 @@ import SettingsSection from "./SettingsSection";
 import Welcome from "./Welcome";
 import Header from "./Header";
 import Stats from "./Stats";
+import History from "./History";
 
 const Page = () => {
   return (
@@ -17,6 +18,7 @@ const Page = () => {
       <WordSection />
       <ButtonBar />
       <Stats />
+      <History />
       <SettingsSection />
     </div>
   );
