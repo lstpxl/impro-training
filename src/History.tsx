@@ -50,31 +50,32 @@ function getLineList(data: Map<string, number | string>[]): LineDesc[] {
     }
   };
   data.forEach((item) => {
-    for (const key in item) {
-      if (item.has(key)) {
-        if (key !== "name") {
-          addLine(key);
-        }
-      }
-    }
+    item.forEach((value, key) => {
+      if (key !== "name") addLine(key);
+    });
   });
   return result;
+}
+
+function mapToAny(data: Map<string, number | string>[]) {
+  return data.map((item) => Object.fromEntries(item));
 }
 
 const HistoryChart = ({ data }: { data: Map<string, number | string>[] }) => {
   // console.log("data1", data);
   const lineList = getLineList(data);
-  // console.log(lineList);
+  // console.log("lines", lineList);
+  // console.log("mapped", mapToAny(data));
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
         width={500}
         height={300}
-        data={data}
+        data={mapToAny(data)}
         margin={{
           top: 5,
-          right: 30,
-          left: 20,
+          right: 40,
+          left: 10,
           bottom: 5,
         }}
       >
@@ -130,7 +131,7 @@ const History = () => {
         <div className="col-span-3 mb-4 text-sm flex gap-4">
           <ChartNoAxesCombined size={20} className="" /> History statistics:
         </div>
-        <div className="w-full h-96">
+        <div className="w-full h-72">
           <HistoryChart data={preparedData} />
         </div>
       </div>
