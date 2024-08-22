@@ -11,60 +11,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { ExerciseScore } from "./ExerciseScore";
-/* 
-const data1 = [
-  {
-    name: "2024-08-02",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-  {
-    name: "2024-08-03",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-  {
-    name: "2024-08-04",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-  {
-    name: "2024-08-05",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-  {
-    name: "2024-08-06",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-  {
-    name: "2024-08-07",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-  {
-    name: "2024-08-08",
-    ping: 23,
-    max: 5.66666,
-    five: 1.6,
-    link: 4,
-  },
-];
- */
-const getColor = (index) => {
+
+const getColor = (index: number) => {
   if (index > 7) {
     const randomColor = Math.floor(Math.random() * 0xffffff).toString(16);
     return `#${randomColor.padStart(6, "0")}`;
@@ -83,10 +31,15 @@ const getColor = (index) => {
   }
 };
 
-const getLineList = (data) => {
-  console.log("data2", data);
-  const result = [];
-  const addLine = (code) => {
+interface LineDesc {
+  dataKey: string;
+  stroke: string;
+}
+
+function getLineList(data: Map<string, number | string>[]): LineDesc[] {
+  // console.log("data2", data);
+  const result: LineDesc[] = [];
+  const addLine = (code: string) => {
     const found = result.findIndex((item) => item.dataKey === code);
     if (found < 0) {
       const elem = {
@@ -97,8 +50,8 @@ const getLineList = (data) => {
     }
   };
   data.forEach((item) => {
-    for (let key in item) {
-      if (item.hasOwnProperty(key)) {
+    for (const key in item) {
+      if (item.has(key)) {
         if (key !== "name") {
           addLine(key);
         }
@@ -106,7 +59,7 @@ const getLineList = (data) => {
     }
   });
   return result;
-};
+}
 
 const HistoryChart = ({ data }) => {
   // console.log("data1", data);
@@ -143,17 +96,17 @@ const HistoryChart = ({ data }) => {
   );
 };
 
-const prepareData = (raw: ExerciseScore[]) => {
-  const result = [];
-  const addPoint = (date, code, value) => {
-    const found = result.findIndex((item) => item.name === date);
+const prepareData = (raw: ExerciseScore[]): Map<string, number | string>[] => {
+  const result: Map<string, number | string>[] = [];
+  const addPoint = (date: string, code: string, value: number) => {
+    const found = result.findIndex((item) => item.get("name") === date);
     if (found >= 0) {
-      result[found][code] = value;
+      // result[found][code] = value;
+      result[found].set(code, value);
     } else {
-      const elem = {
-        name: date,
-      };
-      elem[code] = value;
+      const elem = new Map();
+      elem.set("name", date);
+      elem.set(code, value);
       result.push(elem);
     }
   };
