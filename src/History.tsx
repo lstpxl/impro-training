@@ -114,7 +114,11 @@ const prepareData = (raw: ExerciseScore[]): Map<string, number | string>[] => {
   raw.forEach((item) => {
     if (item.scoring !== "none") {
       const dateStr = new Date(item.timestamp).toISOString().substring(0, 10);
-      addPoint(dateStr, item.code, item.value);
+      addPoint(
+        dateStr,
+        item.code,
+        Math.round((item.value + Number.EPSILON) * 100) / 100
+      );
     }
   });
   return result;
