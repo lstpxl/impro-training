@@ -350,6 +350,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         order: exercise.order,
         name: exercise.name,
         finished: exercise.isFinished,
+        length: exercise.length,
       }),
       []
     );

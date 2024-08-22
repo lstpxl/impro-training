@@ -1,4 +1,4 @@
-import { CircleStop, Play } from "lucide-react";
+import { CircleStop } from "lucide-react";
 import { Button } from "./components/ui/button";
 
 import useLessonStore from "./lessonStore";
@@ -7,7 +7,7 @@ import LessonOverview from "./LessonOverview";
 
 const LessonSection = () => {
   const isStarted = useLessonStore((state) => state.isStarted);
-  const start = useLessonStore((state) => state.start);
+  // const start = useLessonStore((state) => state.start);
   const reset = useLessonStore((state) => state.restart);
 
   return (
@@ -16,19 +16,20 @@ const LessonSection = () => {
         <LessonOverview />
 
         <div className="flex justify-between items-center gap-2">
-          {isStarted ? (
-            <Button
-              variant="secondary"
-              className="hover:bg-gray-300 px-3 py-1"
-              onClick={reset}
-            >
-              <CircleStop size={20} className="mr-2" /> Quit lesson
-            </Button>
-          ) : (
-            <Button className="hover:bg-gray-300 px-4 py-1" onClick={start}>
+          {
+            isStarted ? (
+              <Button
+                variant="secondary"
+                className="hover:bg-gray-300 px-3 py-1"
+                onClick={reset}
+              >
+                <CircleStop size={20} className="mr-2" /> Quit lesson
+              </Button>
+            ) : null
+            /*             <Button className="hover:bg-gray-300 px-4 py-1" onClick={start}>
               <Play size={20} className="mr-2" /> Start
-            </Button>
-          )}
+            </Button> */
+          }
         </div>
       </div>
       <LessonProgress />

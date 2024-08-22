@@ -8,6 +8,42 @@ import {
 
 import useLessonStore from "./lessonStore";
 import { Check, ScrollText } from "lucide-react";
+import { secondsToReadableStr } from "./lib/baseUtils";
+
+interface ExShort {
+  order: number;
+  name: string;
+  finished: boolean;
+  length: number;
+}
+
+interface ContentItemProps {
+  exercise: ExShort;
+  onClick: (a: number) => void;
+}
+
+const ContentItem = ({ exercise, onClick }: ContentItemProps) => {
+  return (
+    <li
+      key={exercise.order}
+      value={String(exercise.order)}
+      onClick={() => onClick(exercise.order)}
+      className="rounded-lg hover:bg-gray-100 cursor-pointer p-2 text-sm flex justify-between items-center gap-2"
+    >
+      <div className="flex gap-2 items-center justify-start">
+        <div className="min-w-6 w-6 h-6">
+          {exercise.finished ? <Check /> : null}
+        </div>
+        <p className="text-left">{`${String(exercise.order)}. ${
+          exercise.name
+        }`}</p>
+      </div>
+      <p className="text-right">
+        {exercise.length ? secondsToReadableStr(exercise.length) : null}
+      </p>
+    </li>
+  );
+};
 
 const LessonOverview = () => {
   const numExercisesTotal = useLessonStore((state) =>
@@ -27,12 +63,6 @@ const LessonOverview = () => {
     jumpToExercise(Number(order));
   }
 
-  interface ExShort {
-    order: number;
-    name: string;
-    finished: boolean;
-  }
-
   if (!filled) return null;
 
   return (
@@ -47,16 +77,10 @@ const LessonOverview = () => {
           <div className="grid gap-4">
             <ul className="grid gap-1 lg:grid-cols-2">
               {exerciseList.map((exercise: ExShort) => (
-                <li
-                  key={exercise.order}
-                  value={String(exercise.order)}
-                  onClick={() => handleJumpToExercise(exercise.order)}
-                  className="rounded-lg hover:bg-gray-100 cursor-pointer p-2 text-sm flex justify-between items-center gap-2"
-                >
-                  {`${String(exercise.order)}. ${exercise.name}`}
-
-                  {exercise.finished ? <Check /> : null}
-                </li>
+                <ContentItem
+                  exercise={exercise}
+                  onClick={handleJumpToExercise}
+                />
               ))}
             </ul>
           </div>
