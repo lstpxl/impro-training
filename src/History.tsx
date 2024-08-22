@@ -50,7 +50,7 @@ function getLineList(data: Map<string, number | string>[]): LineDesc[] {
     }
   };
   data.forEach((item) => {
-    item.forEach((value, key) => {
+    item.forEach((_value, key) => {
       if (key !== "name") addLine(key);
     });
   });
