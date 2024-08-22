@@ -61,7 +61,7 @@ function getLineList(data: Map<string, number | string>[]): LineDesc[] {
   return result;
 }
 
-const HistoryChart = ({ data }) => {
+const HistoryChart = ({ data }: { data: Map<string, number | string>[] }) => {
   // console.log("data1", data);
   const lineList = getLineList(data);
   // console.log(lineList);
