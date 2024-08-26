@@ -26,7 +26,7 @@ const NextExerciseButton = () => {
       onClick={() => jumpToExercise(nextOrder)}
     >
       <StepForward size={24} className="mr-2" />
-      Next execise {t("nextExecise")}
+      {t("nextExecise")}
     </Button>
   );
 };
