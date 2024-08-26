@@ -9,9 +9,11 @@ import {
 import useLessonStore from "./lessonStore";
 import { Check, ScrollText } from "lucide-react";
 import { secondsToReadableStr } from "./lib/baseUtils";
+import { useTranslation } from "react-i18next";
 
 interface ExShort {
   order: number;
+  code: string;
   name: string;
   finished: boolean;
   length: number;
@@ -23,6 +25,7 @@ interface ContentItemProps {
 }
 
 const ContentItem = ({ exercise, onClick }: ContentItemProps) => {
+  const { t } = useTranslation(["exerciseName"]);
   return (
     <li
       value={String(exercise.order)}
@@ -33,9 +36,10 @@ const ContentItem = ({ exercise, onClick }: ContentItemProps) => {
         <div className="min-w-6 w-6 h-6">
           {exercise.finished ? <Check /> : null}
         </div>
-        <p className="text-left">{`${String(exercise.order)}. ${
-          exercise.name
-        }`}</p>
+        <p className="text-left">{`${String(exercise.order)}. ${t(
+          exercise.code,
+          { ns: "exerciseName" }
+        )}`}</p>
       </div>
       <p className="text-right">
         {exercise.length ? secondsToReadableStr(exercise.length) : null}
@@ -45,6 +49,7 @@ const ContentItem = ({ exercise, onClick }: ContentItemProps) => {
 };
 
 const LessonOverview = () => {
+  const { t } = useTranslation(["exercises"]);
   const numExercisesTotal = useLessonStore((state) =>
     state.getNumExercisesTotal()
   );
@@ -86,7 +91,8 @@ const LessonOverview = () => {
           </div>
         </PopoverContent>
       </Popover>
-      {lessonName}
+      {/* {lessonName} */}
+      {t(lessonName ? lessonName : "unknownLesson", { ns: "exercises" })}
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// import AbortExeciseButton from "@/AbortExeciseButton";
 import NextWordButton from "@/NextWordButton";
 import ScoreOneButton from "@/ScoreOneButton";
 import StartExeciseButton from "@/StartExeciseButton";
@@ -10,7 +9,6 @@ const ButtonBar = () => {
       <div className="grid grid-cols-3 gap-4">
         <StartExeciseButton />
         <NextWordButton />
-        {/* <AbortExeciseButton /> */}
         <NextExerciseButton />
         <ScoreOneButton />
       </div>

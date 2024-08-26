@@ -1,8 +1,10 @@
 import { StepForward } from "lucide-react";
 import { Button } from "./components/ui/button";
 import useLessonStore from "./lessonStore";
+import { useTranslation } from "react-i18next";
 
 const NextExerciseButton = () => {
+  const { t } = useTranslation();
   const isDisplayed = useLessonStore((state) =>
     state.getIsAnyExerciseDisplayed()
   );
@@ -20,11 +22,11 @@ const NextExerciseButton = () => {
 
   return (
     <Button
-      className="text-lg col-start-3 hover:opacity-60"
+      className="text-base col-start-3 hover:opacity-60"
       onClick={() => jumpToExercise(nextOrder)}
     >
       <StepForward size={24} className="mr-2" />
-      Next execise
+      Next execise {t("nextExecise")}
     </Button>
   );
 };

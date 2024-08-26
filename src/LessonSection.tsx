@@ -1,13 +1,13 @@
+import { useTranslation } from "react-i18next";
 import { CircleStop } from "lucide-react";
 import { Button } from "./components/ui/button";
-
 import useLessonStore from "./lessonStore";
 import LessonProgress from "./LessonProgress";
 import LessonOverview from "./LessonOverview";
 
 const LessonSection = () => {
+  const { t } = useTranslation();
   const isStarted = useLessonStore((state) => state.isStarted);
-  // const start = useLessonStore((state) => state.start);
   const reset = useLessonStore((state) => state.restart);
 
   return (
@@ -16,20 +16,16 @@ const LessonSection = () => {
         <LessonOverview />
 
         <div className="flex justify-between items-center gap-2">
-          {
-            isStarted ? (
-              <Button
-                variant="secondary"
-                className="hover:bg-gray-300 px-3 py-1"
-                onClick={reset}
-              >
-                <CircleStop size={20} className="mr-2" /> Quit lesson
-              </Button>
-            ) : null
-            /*             <Button className="hover:bg-gray-300 px-4 py-1" onClick={start}>
-              <Play size={20} className="mr-2" /> Start
-            </Button> */
-          }
+          {isStarted ? (
+            <Button
+              variant="secondary"
+              className="hover:bg-gray-300 px-3 py-1"
+              onClick={reset}
+            >
+              <CircleStop size={20} className="mr-2" />
+              {t("quitLesson")}
+            </Button>
+          ) : null}
         </div>
       </div>
       <LessonProgress />

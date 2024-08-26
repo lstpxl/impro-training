@@ -63,7 +63,7 @@ const LessonProgress = () => {
               <span className="font-normal mr-1">
                 {numExercisesTotal ? Number(numExercisesTotal) : null}
               </span>
-              <span className=" mr-1">{t("exercises")}</span>
+              <span className=" mr-1">{t("exercisesTotal")}</span>
             </div>
           </>
         )}

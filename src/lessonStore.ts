@@ -78,6 +78,7 @@ interface LessonState {
 
   getDisplayedExerciseName: () => string | undefined;
   getDisplayedExerciseDescription: () => string | undefined;
+  getDisplayedExerciseCode: () => string | undefined;
   pause: () => void;
 
   getDisplayedExerciseLength: () => number | undefined;
@@ -318,6 +319,9 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   getDisplayedExerciseDescription: () => {
     return calcDisplayedExercise(get().lesson)?.description;
   },
+  getDisplayedExerciseCode: () => {
+    return calcDisplayedExercise(get().lesson)?.code;
+  },
   pause: () =>
     set(
       produce((state) => {
@@ -361,6 +365,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
     const list = exercises.map(
       (exercise) => ({
         order: exercise.order,
+        code: exercise.code,
         name: exercise.name,
         finished: exercise.isFinished,
         length: exercise.length,

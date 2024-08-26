@@ -12,16 +12,18 @@ import { useTranslation } from "react-i18next";
 } */
 
 const SingleScore = ({ data }: { data: ExerciseScore }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["exerciseName", "exercises"]);
   // const unit = getFullScoring(data.scoring);
-  const unit = t(data.scoring);
+  const unit = t(data.scoring, { ns: "exercises" });
   const displayValue = data.scoring !== "none";
   return (
     <>
       <div className="mr-2 col-start-1">
         <Check />
       </div>
-      <div className="mr-1 col-start-2">{data.name}</div>
+      <div className="mr-1 col-start-2">
+        {t(data.code, { ns: "exerciseName" })}
+      </div>
       <div className="col-start-3">
         {displayValue ? (
           <>
