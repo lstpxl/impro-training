@@ -11,6 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { ExerciseScore } from "./ExerciseScore";
+import { useTranslation } from "react-i18next";
 
 const getColor = (index: number) => {
   if (index > 7) {
@@ -125,6 +126,7 @@ const prepareData = (raw: ExerciseScore[]): Map<string, number | string>[] => {
 };
 
 const History = () => {
+  const { t } = useTranslation();
   const scores = useLessonStore((state) => state.scores);
   const preparedData = prepareData(scores);
   if (preparedData.length < 2) return null;
@@ -133,7 +135,8 @@ const History = () => {
     <section id="stats" className="bg-gray-50 rounded-md p-4 ">
       <div className="text-gray-500 text-xs flex flex-col gap-2">
         <div className="col-span-3 mb-4 text-sm flex gap-4">
-          <ChartNoAxesCombined size={20} className="" /> History statistics:
+          <ChartNoAxesCombined size={20} className="" />
+          {t("historyStatistics")}:
         </div>
         <div className="w-full h-72">
           <HistoryChart data={preparedData} />

@@ -1,8 +1,10 @@
 import { secondsToReadableStr } from "./lib/baseUtils";
 import useLessonStore from "./lessonStore";
 import ExerciseProgressBar from "./ExerciseProgressBar";
+import { useTranslation } from "react-i18next";
 
 const ExerciseProgress = () => {
+  const { t } = useTranslation();
   const isRunning = useLessonStore((state) =>
     state.getIsDisplayedExerciseRunning()
   );
@@ -20,7 +22,7 @@ const ExerciseProgress = () => {
         {isRunning ? (
           <>
             <div>
-              <span className="mr-2">Exercise progress:</span>
+              <span className="mr-2">{t("exerciseProgress")}:</span>
               <span className="font-normal mr-1">
                 {length && timeLeft !== undefined
                   ? secondsToReadableStr(length - timeLeft)
@@ -35,13 +37,13 @@ const ExerciseProgress = () => {
               <span className="font-normal mr-1">
                 {timeLeft !== undefined ? secondsToReadableStr(timeLeft) : null}
               </span>
-              <span className="">left</span>
+              <span className="">{t("left")}</span>
             </div>
           </>
         ) : (
           <>
             <div>
-              <span className=" mr-1">Exercise duration:</span>
+              <span className=" mr-1">{t("exerciseDuration")}:</span>
               <span className="font-normal">
                 {length ? secondsToReadableStr(length) : null}
               </span>
@@ -49,7 +51,7 @@ const ExerciseProgress = () => {
             <div>
               {wordInterval ? (
                 <>
-                  <span className=" mr-1">Word change interval:</span>
+                  <span className=" mr-1">{t("wordChangeInterval")}:</span>
                   <span className="font-normal">
                     {length ? secondsToReadableStr(wordInterval) : null}
                   </span>

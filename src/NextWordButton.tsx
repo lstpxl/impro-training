@@ -1,10 +1,10 @@
 import { ArrowBigRight } from "lucide-react";
 import { Button } from "./components/ui/button";
-import useWordStore from "./wordStore";
+// import useWordStore from "./wordStore";
 import useLessonStore from "./lessonStore";
 
 const NextWordButton = () => {
-  const switchWord = useWordStore((state) => state.switchNextWord);
+  const switchWord = useLessonStore((state) => state.switchNextWord);
   const addWordCount = useLessonStore((state) => state.addWordCount);
 
   const isDisplayed = useLessonStore((state) =>
@@ -16,9 +16,9 @@ const NextWordButton = () => {
   const wordAdvance = useLessonStore((state) =>
     state.getDisplayedExerciseWordAdvance()
   );
-  const doubleWords = useLessonStore((state) =>
+  /*   const doubleWords = useLessonStore((state) =>
     state.getDisplayedExerciseDoubleWords()
-  );
+  ); */
 
   const display = wordAdvance === "manual" && isDisplayed && isRun;
   if (!display) return null;
@@ -26,7 +26,7 @@ const NextWordButton = () => {
     <Button
       className="text-xl col-start-2 hover:opacity-60"
       onClick={() => {
-        switchWord(doubleWords === true);
+        switchWord();
         addWordCount();
       }}
     >

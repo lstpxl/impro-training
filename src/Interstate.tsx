@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useLessonStore from "./lessonStore";
-import useWordStore from "./wordStore";
+// import useWordStore from "./wordStore";
 
 const Interstate = () => {
   const doubleWords = useLessonStore((state) =>
@@ -9,10 +9,10 @@ const Interstate = () => {
   const wordNumber = useLessonStore((state) =>
     state.getDisplayedExerciseWordNumber()
   );
-  const switchWord = useWordStore((state) => state.switchNextWord);
+  const switchWord = useLessonStore((state) => state.switchNextWord);
 
   useEffect(() => {
-    if (wordNumber) switchWord(doubleWords === true);
+    if (wordNumber) switchWord();
   }, [switchWord, wordNumber, doubleWords]);
 
   return null;

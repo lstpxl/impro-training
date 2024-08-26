@@ -3,14 +3,14 @@ import bellSfx from "@/assets/bell.mp3";
 import successSfx from "@/assets/success.mp3";
 import wooSfx from "@/assets/woo.mp3";
 import { useEffect } from "react";
-import useWordStore from "./wordStore";
+// import useWordStore from "./wordStore";
 import useOptionsStore from "./optionsStore";
 import useLessonStore from "./lessonStore";
 import { useDidMount } from "./lib/useDidMount";
 
 const SoundPlayerBell = () => {
   const [playBellSound] = useSound(bellSfx);
-  const word = useWordStore((state) => state.currentWord);
+  const word = useLessonStore((state) => state.currentWord);
   useEffect(() => {
     playBellSound();
   }, [word]);

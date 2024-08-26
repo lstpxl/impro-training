@@ -1,8 +1,10 @@
 import { secondsToReadableStr } from "./lib/baseUtils";
 import { Progress } from "./components/ui/progress";
 import useLessonStore from "./lessonStore";
+import { useTranslation } from "react-i18next";
 
 const LessonProgress = () => {
+  const { t } = useTranslation();
   const isStarted = useLessonStore((state) => state.isStarted);
   const lessonLength = useLessonStore((state) => state.getTotalLength());
   const lessonPassedLength = useLessonStore((state) => state.getPassedLength());
@@ -25,7 +27,7 @@ const LessonProgress = () => {
         {isStarted ? (
           <>
             <div>
-              <span className="mr-2">Lesson progress:</span>
+              <span className="mr-2">{t("lessonProgress")}:</span>
               <span>
                 {lessonPassedLength
                   ? secondsToReadableStr(lessonPassedLength)
@@ -46,13 +48,13 @@ const LessonProgress = () => {
               <span className="font-normal mr-1">
                 {numExercisesTotal ? Number(numExercisesTotal) : null}
               </span>
-              <span className="">exercises completed</span>
+              <span className="">{t("exercisesCompleted")}</span>
             </div>
           </>
         ) : (
           <>
             <div>
-              <span className=" mr-1">Lesson duration:</span>
+              <span className=" mr-1">{t("lessonDuration")}:</span>
               <span className="font-normal">
                 {lessonLength ? secondsToReadableStr(lessonLength) : null}
               </span>
@@ -61,7 +63,7 @@ const LessonProgress = () => {
               <span className="font-normal mr-1">
                 {numExercisesTotal ? Number(numExercisesTotal) : null}
               </span>
-              <span className=" mr-1">exercises</span>
+              <span className=" mr-1">{t("exercises")}</span>
             </div>
           </>
         )}

@@ -7,6 +7,7 @@ import { PairMutation, pingExercise } from "./pingExercise";
 import { ExerciseScore } from "./ExerciseScore";
 import { calcScore } from "./calcScore";
 import { loadDataFromLocalStorage, saveDataToLocalStorage } from "./storage";
+import { getInitialWordList, getNextWord, Word } from "./wordList";
 
 interface Lesson {
   name: string;
@@ -54,6 +55,7 @@ interface LessonState {
   // wordTimestamp: number | undefined;
   scoreAddedTrigger: number;
   scores: ExerciseScore[];
+  language: string;
 
   // init: () => void;
   restart: () => void;
@@ -102,6 +104,13 @@ interface LessonState {
   getDisplayedExerciseDoubleWords: () => boolean | undefined;
 
   addWordCount: () => void;
+
+  switchLanguage: (language: string) => void;
+
+  wordList: Word[];
+  currentWord: string | undefined;
+  currentSecondWord: string | undefined;
+  switchNextWord: () => void;
 }
 
 function calcDisplayedExercise(
@@ -151,6 +160,10 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   // wordTimestamp: undefined,
   scoreAddedTrigger: 0,
   scores: loadDataFromLocalStorage(),
+  language: "ru",
+  wordList: getInitialWordList("ru"),
+  currentWord: undefined,
+  currentSecondWord: undefined,
   restart: () =>
     set((state) => {
       const newLesson = getInitialLesson();
@@ -406,6 +419,25 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   getDisplayedExerciseWordNumber: () => {
     return calcDisplayedExercise(get().lesson)?.wordNumber;
   },
+  switchLanguage: (language: string) =>
+    set(
+      produce((state) => {
+        state.language = language;
+        state.wordList = getInitialWordList(language);
+      })
+    ),
+  switchNextWord: () =>
+    set(
+      produce((state) => {
+        const exercise = calcDisplayedExercise(get().lesson);
+        if (!exercise?.length) return;
+        const doubleWords = exercise?.doubleWords;
+        state.currentWord = getNextWord(state.wordList);
+        state.currentSecondWord = doubleWords
+          ? getNextWord(state.wordList)
+          : undefined;
+      })
+    ),
 }));
 
 /* export function useLessonActiveExerciseOrder() {

@@ -1,0 +1,24 @@
+{
+  "translation": {
+    "whatIsImproTrain": "Verbal improvisation training tool",
+    "soundLabel": "Play sounds",
+    "methodLinkLabel": "Method explained in russian",
+    "lessonProgress": "Lesson progress",
+    "exercisesCompleted": "exercises completed",
+    "lessonDuration": "Lesson duration",
+    "exercises": "exercises",
+    "start": "Start",
+    "welcome": "Welcome! Start lesson to display first exercise.",
+    "exerciseProgress": "Exercise progress",
+    "left": "left",
+    "exerciseDuration": "Exercise duration",
+    "wordChangeInterval": "Word change interval",
+    "historyStatistics": "History statistics",
+    "lessonStats": "Current lesson statistics",
+    "completeExerciseForStats": "Complete at least one exercise to see statistics.",
+    "wpm": "words per minute",
+    "wpm5": "words per minute*",
+    "cpw": "clicks per word",
+    "none": "completed or not"
+  }
+}

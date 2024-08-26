@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import useWordStore from "./wordStore";
+// import useWordStore from "./wordStore";
 import useLessonStore from "./lessonStore";
 // import { useDidMount } from "./lib/useDidMount";
 
@@ -8,8 +8,8 @@ interface WordProps {
 }
 const Word = ({ second }: WordProps) => {
   // const didMount = useDidMount();
-  const word = useWordStore((state) => state.currentWord);
-  const secondWord = useWordStore((state) => state.currentSecondWord);
+  const word = useLessonStore((state) => state.currentWord);
+  const secondWord = useLessonStore((state) => state.currentSecondWord);
   const wordToDisplay = second ? secondWord : word;
   const [animate, setAnimate] = useState(false);
   const [firstTime, setFirstTime] = useState(true);
