@@ -27,26 +27,30 @@ const LessonProgress = () => {
         {isStarted ? (
           <>
             <div>
-              <span className="mr-2">{t("lessonProgress")}:</span>
-              <span>
-                {lessonPassedLength
-                  ? secondsToReadableStr(lessonPassedLength)
-                  : secondsToReadableStr(0)}
-              </span>
-              <span className="mx-1">/</span>
-              <span>
-                {lessonLength ? secondsToReadableStr(lessonLength) : null}
+              <span className="mr-2">{t("lessonProgress")}: </span>
+              <span className="text-nowrap">
+                <span>
+                  {lessonPassedLength
+                    ? secondsToReadableStr(lessonPassedLength)
+                    : secondsToReadableStr(0)}
+                </span>
+                <span className="mx-1">/</span>
+                <span>
+                  {lessonLength ? secondsToReadableStr(lessonLength) : null}
+                </span>
               </span>
             </div>
             <div>
-              <span className="font-normal mr-1">
-                {numExercisesPassed !== undefined
-                  ? Number(numExercisesPassed)
-                  : null}
-              </span>
-              <span className="font-normal mr-1">/</span>
-              <span className="font-normal mr-1">
-                {numExercisesTotal ? Number(numExercisesTotal) : null}
+              <span className="text-nowrap">
+                <span className="font-normal mr-1">
+                  {numExercisesPassed !== undefined
+                    ? Number(numExercisesPassed)
+                    : null}
+                </span>
+                <span className="font-normal mr-1">/</span>
+                <span className="font-normal mr-1">
+                  {numExercisesTotal ? Number(numExercisesTotal) : null}
+                </span>
               </span>
               <span className="">{t("exercisesCompleted")}</span>
             </div>
@@ -54,7 +58,7 @@ const LessonProgress = () => {
         ) : (
           <>
             <div>
-              <span className=" mr-1">{t("lessonDuration")}:</span>
+              <span className=" mr-1"> {t("lessonDuration")}: </span>
               <span className="font-normal">
                 {lessonLength ? secondsToReadableStr(lessonLength) : null}
               </span>

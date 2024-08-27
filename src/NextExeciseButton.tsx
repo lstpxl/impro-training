@@ -22,7 +22,7 @@ const NextExerciseButton = () => {
 
   return (
     <Button
-      className="text-base col-start-3 hover:opacity-60"
+      className="text-base col-start-2 hover:opacity-60"
       onClick={() => jumpToExercise(nextOrder)}
     >
       <StepForward size={24} className="mr-2" />

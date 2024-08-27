@@ -6,7 +6,7 @@ import NextExerciseButton from "./NextExeciseButton";
 const ButtonBar = () => {
   return (
     <section id="button_bar" className=" my-8 ">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid gap-4 grid-cols-[1fr_2fr_1fr]">
         <StartExeciseButton />
         <NextWordButton />
         <NextExerciseButton />

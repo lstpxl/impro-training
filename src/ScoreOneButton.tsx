@@ -17,8 +17,8 @@ const ScoreOneButton = () => {
   const display = manualScore && isRun;
   if (!display) return null;
   return (
-    <Button className="text-lg col-start-2 hover:opacity-60" onClick={addScore}>
-      {scoreCount ? `${scoreCount}` : <Plus size={24} />}
+    <Button className="text-xl col-start-2 hover:opacity-60" onClick={addScore}>
+      {scoreCount ? `${scoreCount}` : <Plus size={32} />}
     </Button>
   );
 };

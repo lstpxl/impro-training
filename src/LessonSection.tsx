@@ -19,11 +19,11 @@ const LessonSection = () => {
           {isStarted ? (
             <Button
               variant="secondary"
-              className="hover:bg-gray-300 px-3 py-1"
+              className="hover:bg-gray-300 px-3 py-4 flex gap-2"
               onClick={reset}
             >
-              <CircleStop size={20} className="mr-2" />
-              {t("quitLesson")}
+              <CircleStop size={20} />
+              <div className="text-wrap text-left">{t("quitLesson")}</div>
             </Button>
           ) : null}
         </div>

@@ -19,11 +19,11 @@ const StartExeciseButton = () => {
   if (isRun || !isDisplayed || isFinished) return null;
   return (
     <Button
-      className="text-base col-start-1 hover:opacity-60"
+      className="text-base col-start-2 hover:opacity-60 flex gap-2"
       onClick={startExec}
     >
-      <Play size={24} className="mr-2" />
-      {t("startExecise")}
+      <Play size={24} />
+      <div className="text-wrap text-left pr-2">{t("startExecise")}</div>
     </Button>
   );
 };

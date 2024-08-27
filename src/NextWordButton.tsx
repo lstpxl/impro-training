@@ -26,14 +26,14 @@ const NextWordButton = () => {
   if (!display) return null;
   return (
     <Button
-      className="text-lg col-start-2 hover:opacity-60"
+      className="text-lg col-start-2 hover:opacity-60 flex gap-2"
       onClick={() => {
         switchWord();
         addWordCount();
       }}
     >
       <ArrowBigRight size={32} className="mr-2" />
-      {t("nextWord")}
+      <div className="text-wrap text-left">{t("nextWord")}</div>
     </Button>
   );
 };

@@ -18,8 +18,8 @@
     "completeExerciseForStats": "Выполните хотя-бы одно упражнение, чтобы увидеть показатели.",
     "quitLesson": "Завершить урок",
     "abort": "Прервать",
-    "startExecise": "Начать упражнение",
-    "nextWord": "Следующее слово",
+    "startExecise": "Начать",
+    "nextWord": "Следующее",
     "nextExecise": "Следующее упражнение"
   },
   "exercises": {

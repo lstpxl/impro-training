@@ -22,15 +22,17 @@ const ExerciseProgress = () => {
         {isRunning ? (
           <>
             <div>
-              <span className="mr-2">{t("exerciseProgress")}:</span>
-              <span className="font-normal mr-1">
-                {length && timeLeft !== undefined
-                  ? secondsToReadableStr(length - timeLeft)
-                  : null}
-              </span>
-              <span className="mr-1"> / </span>
-              <span className="font-normal mr-1">
-                {length ? secondsToReadableStr(length) : null}
+              <span className="mr-2">{t("exerciseProgress")}: </span>
+              <span className="text-nowrap">
+                <span className="font-normal mr-1">
+                  {length && timeLeft !== undefined
+                    ? secondsToReadableStr(length - timeLeft)
+                    : null}
+                </span>
+                <span className="mr-1"> / </span>
+                <span className="font-normal mr-1">
+                  {length ? secondsToReadableStr(length) : null}
+                </span>
               </span>
             </div>
             <div>
