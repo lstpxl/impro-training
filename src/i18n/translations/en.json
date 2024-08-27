@@ -41,13 +41,13 @@
     "link": "Link"
   },
   "exerciseDesc": {
-    "ping": "Say association for every word and press the button. Goal is to say as much words as possible.",
-    "max": "На каждое слово дается 15 секунд. Цель - озвучить как можно больше ассоциаций к нему. Нажмите «+» за каждое озвученное слово.",
-    "five": "придумать пять контекстов или значений для каждого слова, цель - обработать как можно больше слов",
-    "idea": "строим идею от 1 слова и рассказываем её",
-    "usewords": "строить одну идею и рассказывать с использованием этих слов",
-    "dream": "от 1 слова, [безумная] связная история. (усложнение - история из своей жизни)",
-    "stream": "связная смена темы каждые 30 секунд, [два человека по-очереди]",
-    "link": "придумать и рассказать связь между каждой парой слов, цель - как можно больше"
+    "ping": "Say association for displayed word and press the button. Goal is to process as much words as possible.",
+    "max": "You are given 15 seconds for every word. Goal is to say as much associations for it as possible. Press the button for every associations you say.",
+    "five": "Remember five meanings or contexts for every word. Goal is to process as much words as possible.",
+    "idea": "Compose your idea based on given word and explain it.",
+    "usewords": "Compose your idea and explain it using the given words.",
+    "dream": "Start telling story with mentioning the given word. Evolve the story in any crazy way you like. You can make task more difficult by making the story biographycal.",
+    "stream": "Compose and explain simple idea based on the word given while limiting explaination to 30 seconds. When the next word appears, answer to that idea with a new one, based on this word. Optionally you can do it with another person in turns.",
+    "link": "Explain link between displayed words and press the button. Goal is to process as much word pairs as possible.s"
   }
 }
