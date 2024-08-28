@@ -17,10 +17,12 @@
     "lessonStats": "Показатели текущего урока",
     "completeExerciseForStats": "Выполните хотя-бы одно упражнение, чтобы увидеть показатели.",
     "quitLesson": "Завершить урок",
+    "restartLesson": "Повторить урок",
     "abort": "Прервать",
     "startExecise": "Начать",
     "nextWord": "Следующее",
-    "nextExecise": "Следующее упражнение"
+    "nextExecise": "Следующее упражнение",
+    "finishCongratulation": "Поздравляю! Вы закончили урок. Повторите завтра и получите улучшеный результат."
   },
   "exercises": {
     "defaultLessonName": "Базовый урок 15 минут",

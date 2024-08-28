@@ -17,10 +17,12 @@
     "lessonStats": "Current lesson statistics",
     "completeExerciseForStats": "Complete at least one exercise to see statistics.",
     "quitLesson": "Quit lesson",
+    "restartLesson": "Restart lesson",
     "abort": "Abort",
     "startExecise": "Start execise",
     "nextWord": "Next word",
-    "nextExecise": "Next execise"
+    "nextExecise": "Next execise",
+    "finishCongratulation": "Congratulations! You've finished the lesson. Come tomorrow for repetition and get better results."
   },
   "exercises": {
     "defaultLessonName": "Basic lesson 15 minutes",

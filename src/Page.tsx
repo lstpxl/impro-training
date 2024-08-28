@@ -7,6 +7,7 @@ import Welcome from "./Welcome";
 import Header from "./Header";
 import Stats from "./Stats";
 import History from "./History";
+import Finish from "./Finish";
 
 const Page = () => {
   return (
@@ -14,6 +15,7 @@ const Page = () => {
       <Header />
       <LessonSection />
       <Welcome />
+      <Finish />
       <ExerciseSection />
       <WordSection />
       <ButtonBar />

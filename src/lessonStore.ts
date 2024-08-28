@@ -58,8 +58,9 @@ interface LessonState {
   language: string;
 
   // init: () => void;
-  restart: () => void;
+  reset: () => void;
   start: () => void;
+  restart: () => void;
   abort: () => void;
   ping: () => void;
   abortExercise: () => void;
@@ -165,7 +166,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   wordList: getInitialWordList("ru"),
   currentWord: undefined,
   currentSecondWord: undefined,
-  restart: () =>
+  reset: () =>
     set((state) => {
       const newLesson = getInitialLesson();
       // const newStatus = calcStatusStr(state);
@@ -196,6 +197,40 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           state.activeExercise.isDisplayed = false;
           state.activeExercise.isRun = false;
         } */
+        if (nextExercise) {
+          nextExercise.isDisplayed = true;
+          nextExercise.isRun = false;
+        }
+        // const newStatus = calcStatusStr(state);
+        state.isStarted = true;
+        // state.timestampStarted = Date.now();
+        state.progress = 0;
+        // state.status = newStatus;
+        // state.activeExercise = nextExercise;
+      })
+    ),
+  restart: () =>
+    set(
+      produce((state) => {
+        const newLesson = getInitialLesson();
+        state.lesson = newLesson;
+        state.length = getLessonLength(newLesson);
+        state.isStarted = false;
+        state.progress = undefined;
+        state.activeExercise = newLesson[0];
+        //
+        const nextExercise = state?.lesson?.exercises.reduce(
+          (
+            acc: ExerciseStorage | undefined,
+            exercise: ExerciseStorage
+          ): ExerciseStorage | undefined =>
+            acc !== undefined ? acc : exercise.isFinished ? acc : exercise,
+          undefined
+        );
+        /*         if (state.activeExercise) {
+            state.activeExercise.isDisplayed = false;
+            state.activeExercise.isRun = false;
+          } */
         if (nextExercise) {
           nextExercise.isDisplayed = true;
           nextExercise.isRun = false;
