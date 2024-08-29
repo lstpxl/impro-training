@@ -34,7 +34,8 @@ html {
 @tailwind utilities;
 
 .animate-pop {
-  animation: 0.5s ease-out 0s infinite alternate anim1;
+  animation: 0.5s ease-out 0s alternate anim1;
+  animation-iteration-count: 1;
 }
 
 @keyframes anim1 {
