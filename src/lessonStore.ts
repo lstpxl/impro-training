@@ -431,6 +431,7 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         targetExercise.isDisplayed = true;
         state.currentWord = undefined;
         state.currentSecondWord = undefined;
+        state.isStarted = true;
       })
     ),
   getDisplayedExerciseIsManualScore: () => {
