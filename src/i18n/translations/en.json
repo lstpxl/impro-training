@@ -50,6 +50,6 @@
     "usewords": "Compose your idea and explain it using the given words.",
     "dream": "Start telling story with mentioning the given word. Evolve the story in any crazy way you like. You can make task more difficult by making the story biographycal.",
     "stream": "Compose and explain simple idea based on the word given while limiting explaination to 30 seconds. When the next word appears, answer to that idea with a new one, based on this word. Optionally you can do it with another person in turns.",
-    "link": "Explain link between displayed words and press the button. Goal is to process as much word pairs as possible.s"
+    "link": "Explain link between displayed words and press the button. Goal is to process as much word pairs as possible."
   }
 }
