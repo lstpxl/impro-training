@@ -57,6 +57,10 @@ interface LessonState {
   scores: ExerciseScore[];
   language: string;
 
+  wordList: Word[];
+  currentWord: string | undefined;
+  currentSecondWord: string | undefined;
+
   // init: () => void;
   reset: () => void;
   start: () => void;
@@ -106,12 +110,7 @@ interface LessonState {
   getDisplayedExerciseDoubleWords: () => boolean | undefined;
 
   addWordCount: () => void;
-
   switchLanguage: (language: string) => void;
-
-  wordList: Word[];
-  currentWord: string | undefined;
-  currentSecondWord: string | undefined;
   switchNextWord: () => void;
 }
 
@@ -180,6 +179,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         // status: newStatus,
         progress: undefined,
         activeExercise: newLesson[0],
+        currentWord: undefined,
+        currentSecondWord: undefined,
       };
     }),
   start: () =>
@@ -207,6 +208,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         state.progress = 0;
         // state.status = newStatus;
         // state.activeExercise = nextExercise;
+        state.currentWord = undefined;
+        state.currentSecondWord = undefined;
       })
     ),
   restart: () =>
@@ -241,6 +244,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         state.progress = 0;
         // state.status = newStatus;
         // state.activeExercise = nextExercise;
+        state.currentWord = undefined;
+        state.currentSecondWord = undefined;
       })
     ),
   abort: () => set((state) => ({ ...state, isStarted: false, time: 0 })),
@@ -259,6 +264,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
           exercise.msPassed = 0;
           exercise.progress = 0;
         }
+        state.currentWord = undefined;
+        state.currentSecondWord = undefined;
       })
     ),
   ping: () =>
@@ -375,7 +382,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
   },
   getDisplayedExerciseDoubleWords: () => {
     const exercise = calcDisplayedExercise(get().lesson);
-    return exercise?.doubleWords;
+    const result = exercise?.doubleWords;
+    return result === undefined ? false : result;
   },
   getDisplayedExerciseRemainingTime: () => {
     const exercise = calcDisplayedExercise(get().lesson);
@@ -421,6 +429,8 @@ const useLessonStore = create<LessonState>()((set, get) => ({
         }
         targetExercise.isRun = false;
         targetExercise.isDisplayed = true;
+        state.currentWord = undefined;
+        state.currentSecondWord = undefined;
       })
     ),
   getDisplayedExerciseIsManualScore: () => {

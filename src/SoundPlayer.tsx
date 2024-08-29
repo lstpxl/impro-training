@@ -12,7 +12,7 @@ const SoundPlayerBell = () => {
   const [playBellSound] = useSound(bellSfx);
   const word = useLessonStore((state) => state.currentWord);
   useEffect(() => {
-    playBellSound();
+    if (word !== undefined) playBellSound();
   }, [word]);
   return null;
 };

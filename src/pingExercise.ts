@@ -36,6 +36,8 @@ export function pingExercise(exercise: ExerciseStorage): PairMutation {
   if (finished) {
     toExercise.set("isFinished", finished);
     toExercise.set("isRun", !finished);
+    toLesson.set("currentWord", undefined);
+    toLesson.set("currentSecondWord", undefined);
   } else {
     const newWordNumber =
       exercise.wordAdvance === "auto" && exercise.wordInterval

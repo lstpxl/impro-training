@@ -6,7 +6,9 @@ interface WordProps {
 }
 const Word = ({ second }: WordProps) => {
   const elementRef = useRef<HTMLDivElement | null>(null);
-  const [displayedWord, setDisplayedWord] = useState("");
+  const [displayedWord, setDisplayedWord] = useState<string | undefined>(
+    undefined
+  );
   const word = useLessonStore((state) => state.currentWord);
   const secondWord = useLessonStore((state) => state.currentSecondWord);
   const wordToDisplay = second ? secondWord : word;
@@ -21,7 +23,6 @@ const Word = ({ second }: WordProps) => {
   const displayWord = isDisplayed && isRunning;
 
   const fireAnimation = () => {
-    // console.log("fire");
     const elem = elementRef.current;
     if (elem !== null) {
       elem.style.animation = "none";
@@ -41,7 +42,7 @@ const Word = ({ second }: WordProps) => {
 
   useEffect(() => {
     if (displayedWord !== wordToDisplay) {
-      setDisplayedWord(wordToDisplay || "");
+      setDisplayedWord(wordToDisplay || undefined);
       if (wordToDisplay && wordToDisplay.length > 0) fireAnimation();
     }
   }, [wordToDisplay, displayedWord]);
@@ -59,7 +60,7 @@ const Word = ({ second }: WordProps) => {
         displayWord ? " text-white bg-gray-600 " : " text-gray-200 bg-gray-100 "
       } ${animateClass ? " animate-pop " : ""}`}
       onAnimationEnd={handleAnimationEvent}
-      onAnimationStart={handleAnimationEvent}
+      // onAnimationStart={handleAnimationEvent}
     >
       {displayWord ? displayedWord : "impro 🙊 training"}
     </div>
