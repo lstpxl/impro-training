@@ -38,7 +38,6 @@ interface LineDesc {
 }
 
 function getLineList(data: Map<string, number | string>[]): LineDesc[] {
-  // console.log("data2", data);
   const result: LineDesc[] = [];
   const addLine = (code: string) => {
     const found = result.findIndex((item) => item.dataKey === code);
@@ -52,7 +51,7 @@ function getLineList(data: Map<string, number | string>[]): LineDesc[] {
   };
   data.forEach((item) => {
     item.forEach((_value, key) => {
-      if (key !== "name") addLine(key);
+      if (key !== "date") addLine(key);
     });
   });
   return result;
@@ -63,10 +62,8 @@ function mapToAny(data: Map<string, number | string>[]) {
 }
 
 const HistoryChart = ({ data }: { data: Map<string, number | string>[] }) => {
-  // console.log("data1", data);
+  const { t } = useTranslation();
   const lineList = getLineList(data);
-  // console.log("lines", lineList);
-  // console.log("mapped", mapToAny(data));
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
@@ -81,7 +78,7 @@ const HistoryChart = ({ data }: { data: Map<string, number | string>[] }) => {
         }}
       >
         <CartesianGrid strokeDasharray="1 4" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
         <Legend />
@@ -91,6 +88,7 @@ const HistoryChart = ({ data }: { data: Map<string, number | string>[] }) => {
             type="monotone"
             dataKey={line.dataKey}
             stroke={line.stroke}
+            name={t(line.dataKey, { ns: "exerciseName" })}
           />
         ))}
       </LineChart>
@@ -101,13 +99,12 @@ const HistoryChart = ({ data }: { data: Map<string, number | string>[] }) => {
 const prepareData = (raw: ExerciseScore[]): Map<string, number | string>[] => {
   const result: Map<string, number | string>[] = [];
   const addPoint = (date: string, code: string, value: number) => {
-    const found = result.findIndex((item) => item.get("name") === date);
+    const found = result.findIndex((item) => item.get("date") === date);
     if (found >= 0) {
-      // result[found][code] = value;
       result[found].set(code, value);
     } else {
       const elem = new Map();
-      elem.set("name", date);
+      elem.set("date", date);
       elem.set(code, value);
       result.push(elem);
     }
